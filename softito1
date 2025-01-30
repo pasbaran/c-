@@ -23,3 +23,33 @@
         Console.WriteLine($" Çift Sayıların Toplamı: {ciftToplam}");
         Console.WriteLine($" Tek Sayıların Toplamı: {tekToplam}");
         Console.ReadLine();
+
+-------------------------------------------
+
+
+Console.Write("Üçgen: ");
+        int body = int.Parse(Console.ReadLine());
+
+        int i = 1; 
+        int satir = body; 
+
+        while (i <= body)
+        {
+            int bosluk = body - i;
+            int j = 0;
+
+            while (j < bosluk)
+            {
+                Console.Write(" ");
+                j++;
+            }
+
+            j = 0;
+            while (j < (2 * i - 1))
+            {
+                Console.Write("*");
+                j++;
+            }
+
+            Console.WriteLine(); 
+            i++;
