@@ -1,33 +1,25 @@
-            int sayi;
-            int cifttoplam = 0;
-            int tektoplam = 0;
-            int tek = 0;
-            int i = 0;
-            int j = 1;
+        Console.WriteLine("Bir sayı girin: ");
 
-            Console.WriteLine("Lütfen bir sayı girin:");
-            sayi = Convert.ToInt32(Console.ReadLine());
+        int sayi = int.Parse(Console.ReadLine());
 
-            while (i <= sayi || j <= sayi)
-            {
-                if (i <= sayi)
-                {
-                    cifttoplam += i;
-                    i += 2;
-                }
+        int ciftToplam = 0;
+        int tekToplam = 0;
 
-                if (j <= sayi)
-                {
-                    tektoplam += j;
-                    j += 2;
-                }
-            }
+        int i = 0; 
+        int j = 1;
 
-            tek = tektoplam - j;
-
-            // Sonuçları yazdırmak için ek kod ekleyebilirsiniz
-            Console.WriteLine("Çift toplam: " + cifttoplam);
-            Console.WriteLine("Tek toplam: " + tek);
+        while (i < sayi)
+        {
+            ciftToplam = ciftToplam + i;
+            i += 2;
         }
-    }
-}
+
+        while (j <= sayi) // Tek sayılar için döngü
+        {
+            tekToplam = tekToplam + j;
+            j += 2;
+        }
+
+        Console.WriteLine($" Çift Sayıların Toplamı: {ciftToplam}");
+        Console.WriteLine($" Tek Sayıların Toplamı: {tekToplam}");
+        Console.ReadLine();
