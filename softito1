@@ -1,4 +1,7 @@
-        Console.WriteLine("Bir sayı girin: ");
+Baran Paş 
+
+
+Console.WriteLine("Bir sayı girin: ");
 
         int sayi = int.Parse(Console.ReadLine());
 
@@ -116,5 +119,34 @@ fibo
  Console.WriteLine(metin);
 
 ---------------------------------
+asal
 
+Console.WriteLine("1 sayi gir");
+int sayi = int.Parse(Console.ReadLine());
+string metin = "";
+int i = 2;
+
+while (i <= sayi)
+{
+    bool durum = true;
+    int j = 2;
+
+    while (j < i)
+    {
+        if (i % j == 0)
+        {
+            durum = false;
+            break;
+        }
+        j++;
+    }
+
+    if (durum == true)
+    {
+        metin = metin + i + " ";
+    }
+    i++;
+}
+
+Console.WriteLine(metin);
 
