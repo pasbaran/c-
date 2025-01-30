@@ -25,9 +25,27 @@
         Console.ReadLine();
 
 -------------------------------------------
+1223334444
+
+int i = 1;
+
+ while (i <= 5)
+ {
+     int j = 0;
+
+     while (j < i)
+     {
+         Console.Write(i + " ");
+         j++;
+     }
+
+     Console.WriteLine();
 
 
-Console.Write("Üçgen: ");
+
+------------------------------------------
+
+Console.Write("sayı gir: ");
         int body = int.Parse(Console.ReadLine());
 
         int i = 1; 
@@ -53,3 +71,50 @@ Console.Write("Üçgen: ");
 
             Console.WriteLine(); 
             i++;
+
+-----------------------------------------
+ağaç
+
+
+        int i = 0;
+
+        while (i < 5) // 5 satır için döngü
+        {
+            Console.WriteLine();
+            int j = 4 - i;
+            while (j > 0)
+            {
+                Console.Write(" ");
+                j--;
+            }
+
+            int k = 0;
+            while (k < 2 * i + 1)
+            {
+                Console.Write("*");
+                k++;
+            }
+
+            i++;
+
+----------------------------------------
+fibo
+
+ Console.WriteLine("Bir sayı giriniz:");
+ int sayi = int.Parse(Console.ReadLine());
+ int a = 1, b = 1;
+ String metin = "1 1";
+ int i = 0;
+ while (i < sayi) 
+ {
+     int toplam = a + b;
+     a = b;
+     b = toplam;
+     metin = metin + " " + toplam;
+     i++;
+ }
+ Console.WriteLine(metin);
+
+---------------------------------
+
+
