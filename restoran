@@ -1,4 +1,5 @@
-Baran Paş Restoran Menüsü
+Baran Paş Restoran Menüsü 
+(hocam son halini tekrar paylaşacağım ameliyat sebebiyle erken paylaştım)
     {
         int[] masalar = { 1, 1, 1, 0, 0, 0, 0 };
 
