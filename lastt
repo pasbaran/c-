@@ -6,13 +6,13 @@ class Program
     {
         int[] masalar = { 1, 1, 1, 0, 0, 0, 0 };
 
-        string[] yemekler = { "Et Yemeği 1 - 50 TL", "Et Yemeği 2 - 60 TL", "Et Yemeği 3 - 70 TL", 
-                              "Pizza 1 - 55 TL", "Pizza 2 - 65 TL", "Pizza 3 - 75 TL" };
-        int[] yemekFiyatlar = { 50, 60, 70, 55, 65, 75 };
+              string[] yemekler = { "Et Yemeği 1 - 500 TL", "Et Yemeği 2 - 600 TL", "Et Yemeği 3 - 700 TL", 
+                              "Pizza 1 - 255 TL", "Pizza 2 - 265 TL", "Pizza 3 - 275 TL" };
+        int[] yemekFiyatlar = { 500, 600, 700, 255, 265, 275 };
 
         string[] icecekler = { "Sıcak İçecek 1 - 15 TL", "Sıcak İçecek 2 - 20 TL", "Sıcak İçecek 3 - 25 TL",
-                               "Soğuk İçecek 1 - 10 TL", "Soğuk İçecek 2 - 15 TL", "Soğuk İçecek 3 - 20 TL" };
-        int[] icecekFiyatlar = { 15, 20, 25, 10, 15, 20 };
+                               "Soğuk İçecek 1 - 30 TL", "Soğuk İçecek 2 - 40 TL", "Soğuk İçecek 3 - 50 TL" };
+        int[] icecekFiyatlar = { 15, 20, 25, 30, 40, 50 };
 
         int[][] siparisler = new int[masalar.Length][];
         for (int i = 0; i < masalar.Length; i++)
