@@ -1,0 +1,184 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        int[] masalar = { 1, 1, 1, 0, 0, 0, 0 };
+
+        string[] yemekler = { "Et Yemeği 1 - 50 TL", "Et Yemeği 2 - 60 TL", "Et Yemeği 3 - 70 TL", 
+                              "Pizza 1 - 55 TL", "Pizza 2 - 65 TL", "Pizza 3 - 75 TL" };
+        int[] yemekFiyatlar = { 50, 60, 70, 55, 65, 75 };
+
+        string[] icecekler = { "Sıcak İçecek 1 - 15 TL", "Sıcak İçecek 2 - 20 TL", "Sıcak İçecek 3 - 25 TL",
+                               "Soğuk İçecek 1 - 10 TL", "Soğuk İçecek 2 - 15 TL", "Soğuk İçecek 3 - 20 TL" };
+        int[] icecekFiyatlar = { 15, 20, 25, 10, 15, 20 };
+
+        int[][] siparisler = new int[masalar.Length][];
+        for (int i = 0; i < masalar.Length; i++)
+        {
+            siparisler[i] = new int[0];
+        }
+
+        while (true)
+        {
+            Console.Clear();
+            Console.WriteLine("ANA MENÜ");
+            Console.WriteLine("[1] Masa Aç");
+            Console.WriteLine("[2] Sipariş Al");
+            Console.WriteLine("[3] Hesap Göster");
+            Console.WriteLine("[4] Çıkış Yap");
+            Console.Write("Seçiminiz: ");
+            string secim = Console.ReadLine();
+
+            if (secim == "1")
+            {
+                Console.Clear();
+                Console.WriteLine("Masa Durumları:");
+                for (int i = 0; i < masalar.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. Masa [{(masalar[i] == 1 ? "boş" : "dolu")}]");
+                }
+
+                Console.Write("Hangi masayı açmak istiyorsunuz? (ID girin): ");
+                if (int.TryParse(Console.ReadLine(), out int masaID) && masaID > 0 && masaID <= masalar.Length)
+                {
+                    masaID--;
+                    if (masalar[masaID] == 1)
+                    {
+                        masalar[masaID] = 0;
+                        Console.WriteLine("Masa başarıyla açıldı. Devam etmek için Enter'a basın.");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bu masa zaten dolu!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Geçersiz giriş! Tekrar deneyin.");
+                }
+                Console.ReadLine();
+            }
+            else if (secim == "2")
+            {
+                Console.Clear();
+                Console.WriteLine("Masa Durumları:");
+                for (int i = 0; i < masalar.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. Masa [{(masalar[i] == 1 ? "boş" : "dolu")}]");
+                }
+
+                Console.Write("Hangi masada işlem yapmak istiyorsunuz? (ID girin): ");
+                if (int.TryParse(Console.ReadLine(), out int masaID) && masaID > 0 && masaID <= masalar.Length)
+                {
+                    masaID--;
+                    if (masalar[masaID] == 0)
+                    {
+                        while (true)
+                        {
+                            Console.Clear();
+                            Console.WriteLine("MENÜ");
+                            Console.WriteLine("Yemekler:");
+                            for (int i = 0; i < yemekler.Length; i++)
+                            {
+                                Console.WriteLine($"{i + 1}. {yemekler[i]}");
+                            }
+                            Console.WriteLine("İçecekler:");
+                            for (int i = 0; i < icecekler.Length; i++)
+                            {
+                                Console.WriteLine($"{i + 1 + yemekler.Length}. {icecekler[i]}");
+                            }
+
+                            Console.Write("Sipariş eklemek için ürün ID'si girin veya [0] ile çıkın: ");
+                            if (int.TryParse(Console.ReadLine(), out int urunID) && urunID >= 0 && urunID <= yemekler.Length + icecekler.Length)
+                            {
+                                if (urunID == 0) break;
+
+                                urunID--;
+
+                                int[] yeniSiparisListesi = new int[siparisler[masaID].Length + 1];
+                                for (int i = 0; i < siparisler[masaID].Length; i++)
+                                {
+                                    yeniSiparisListesi[i] = siparisler[masaID][i];
+                                }
+
+                                if (urunID < yemekler.Length)
+                                {
+                                    yeniSiparisListesi[siparisler[masaID].Length] = yemekFiyatlar[urunID];
+                                    Console.WriteLine($"Seçilen Ürün: {yemekler[urunID]}");
+                                }
+                                else
+                                {
+                                    yeniSiparisListesi[siparisler[masaID].Length] = icecekFiyatlar[urunID - yemekler.Length];
+                                    Console.WriteLine($"Seçilen Ürün: {icecekler[urunID - yemekler.Length]}");
+                                }
+
+                                siparisler[masaID] = yeniSiparisListesi;
+                                Console.WriteLine("Sipariş başarıyla eklendi. Devam etmek için Enter'a basın.");
+                                Console.ReadLine();
+                            }
+                            else
+                            {
+                                Console.WriteLine("Geçersiz giriş! Tekrar deneyin.");
+                                Console.ReadLine();
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bu masa boş! Önce masayı açmalısınız.");
+                        Console.ReadLine();
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Geçersiz giriş! Tekrar deneyin.");
+                    Console.ReadLine();
+                }
+            }
+            else if (secim == "3")
+            {
+                Console.Clear();
+                Console.WriteLine("Hesap Durumu:");
+                Console.Write("Hangi masanın hesabını görmek istiyorsunuz? (ID girin): ");
+                if (int.TryParse(Console.ReadLine(), out int masaID) && masaID > 0 && masaID <= masalar.Length)
+                {
+                    masaID--;
+                    if (masalar[masaID] == 0)
+                    {
+                        Console.WriteLine($"{masaID + 1}. Masanın Siparişleri:");
+                        int toplamTutar = 0;
+                        for (int i = 0; i < siparisler[masaID].Length; i++)
+                        {
+                            Console.WriteLine($"- {siparisler[masaID][i]} TL");
+                            toplamTutar += siparisler[masaID][i];
+                        }
+
+                        Console.WriteLine($"Toplam Tutar: {toplamTutar} TL");
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bu masa boş!");
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Geçersiz giriş! Tekrar deneyin.");
+                }
+                Console.ReadLine();
+            }
+            else if (secim == "4")
+            {
+                Console.Clear();
+                Console.WriteLine("Çıkış yapılıyor...");
+                return;
+            }
+            else
+            {
+                Console.WriteLine("Geçersiz seçim! Tekrar deneyin.");
+                Console.ReadLine();
+            }
+        }
+    }
+}
