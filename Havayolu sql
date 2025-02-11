@@ -1,3 +1,5 @@
+BARAN PAŞ
+
 CREATE TABLE Yolcular (
     yolcu_id INT PRIMARY KEY AUTO_INCREMENT,
     ad VARCHAR(50),
