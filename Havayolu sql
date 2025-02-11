@@ -1,0 +1,88 @@
+CREATE TABLE Yolcular (
+    yolcu_id INT PRIMARY KEY AUTO_INCREMENT,
+    ad VARCHAR(50),
+    soyad VARCHAR(50),
+    dogum_tarihi DATE,
+    cinsiyet ENUM('Erkek', 'Kadın'),
+    telefon VARCHAR(15),
+    email VARCHAR(100)
+);
+
+CREATE TABLE Ucuslar (
+    ucus_id INT PRIMARY KEY AUTO_INCREMENT,
+    havayolu_id INT,
+    kalkis_havalimani VARCHAR(100),
+    varis_havalimani VARCHAR(100),
+    kalkis_tarihi DATETIME,
+    varis_tarihi DATETIME,
+    FOREIGN KEY (havayolu_id) REFERENCES Havayollari(havayolu_id)
+);
+
+CREATE TABLE Havayollari (
+    havayolu_id INT PRIMARY KEY AUTO_INCREMENT,
+    havayolu_adi VARCHAR(100),
+    ulke VARCHAR(50)
+);
+
+CREATE TABLE Biletler (
+    bilet_id INT PRIMARY KEY AUTO_INCREMENT,
+    yolcu_id INT,
+    ucus_id INT,
+    sinif ENUM('Ekonomi', 'Business', 'First Class'),
+    fiyat DECIMAL(10,2),
+    FOREIGN KEY (yolcu_id) REFERENCES Yolcular(yolcu_id),
+    FOREIGN KEY (ucus_id) REFERENCES Ucuslar(ucus_id)
+);
+
+CREATE TABLE Havalimanlari (
+    havalimanı_id INT PRIMARY KEY AUTO_INCREMENT,
+    havalimanı_adi VARCHAR(100),
+    sehir VARCHAR(50),
+    ulke VARCHAR(50)
+);
+
+CREATE TABLE Bagajlar (
+    bagaj_id INT PRIMARY KEY AUTO_INCREMENT,
+    yolcu_id INT,
+    ucus_id INT,
+    durum ENUM('Teslim Edildi', 'Kayıp', 'Beklemede'),
+    FOREIGN KEY (yolcu_id) REFERENCES Yolcular(yolcu_id),
+    FOREIGN KEY (ucus_id) REFERENCES Ucuslar(ucus_id)
+);
+
+SELECT * FROM Biletler WHERE yolcu_id = 1;
+
+SELECT u.ucus_id, u.kalkis_havalimani, u.varis_havalimani, u.kalkis_tarihi 
+FROM Ucuslar u
+JOIN Havayollari h ON u.havayolu_id = h.havayolu_id
+WHERE h.havayolu_adi = 'Turkish Airlines';
+
+SELECT * FROM Ucuslar WHERE DATE(kalkis_tarihi) = '2025-02-10';
+
+SELECT * FROM Bagajlar WHERE yolcu_id = 3;
+
+SELECT * FROM Ucuslar WHERE kalkis_havalimani = 'İstanbul Havalimanı';
+
+SELECT fiyat FROM Biletler WHERE bilet_id = 5;
+
+SELECT ucus_id, COUNT(*) AS yolcu_sayisi FROM Biletler WHERE ucus_id = 10 GROUP BY ucus_id;
+
+SELECT * FROM Biletler ORDER BY fiyat DESC LIMIT 1;
+SELECT * FROM Biletler ORDER BY fiyat ASC LIMIT 1;
+
+SELECT kalkis_havalimani, COUNT(*) AS ucus_sayisi FROM Ucuslar GROUP BY kalkis_havalimani ORDER BY ucus_sayisi DESC LIMIT 5;
+
+SELECT * FROM Bagajlar WHERE durum = 'Kayıp';
+
+SELECT h.havayolu_adi, COUNT(*) AS toplam_ucus FROM Ucuslar u
+JOIN Havayollari h ON u.havayolu_id = h.havayolu_id
+GROUP BY h.havayolu_adi ORDER BY toplam_ucus DESC;
+
+SELECT yolcu_id, COUNT(*) AS toplam_ucus FROM Biletler GROUP BY yolcu_id ORDER BY toplam_ucus DESC LIMIT 1;
+
+SELECT h.havalimanı_adi, COUNT(*) AS kalkis_sayisi FROM Ucuslar u
+JOIN Havalimanlari h ON u.kalkis_havalimani = h.havalimanı_adi
+GROUP BY h.havalimanı_adi ORDER BY kalkis_sayisi DESC LIMIT 1;
+
+SELECT b.yolcu_id, COUNT(*) AS bagaj_sayisi FROM Bagajlar b
+WHERE b.durum = 'Teslim Edildi' GROUP BY b.yolcu_id ORDER BY bagaj_sayisi DESC LIMIT 1;
